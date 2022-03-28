@@ -7,6 +7,7 @@ import Landing from '../features/onboarding/landing/landing.screen';
 import Login from '../features/onboarding/login/login.screen';
 import Call from '../features/connect/connect.screen';
 import Validate from '../features/validate/validate.screen';
+import Home from '../features/home/home.screen';
 
 const Container = () => {
     return (
@@ -31,6 +32,7 @@ const Container = () => {
         <Stack.Screen name="login" component={Login} options={{title: 'Connexion', headerShown: true}} />
         <Stack.Screen name="call" component={Call} options={{title: 'Connexion', headerShown: true}} />
         <Stack.Screen name="validateNumber" component={Validate} options={{title: 'Connexion', headerShown: true}} />
+        <Stack.Screen name="connected" component={Home} options={{title: 'Accueil', headerShown: true}} />
         </Stack.Navigator>
         </NavigationContainer>
         );

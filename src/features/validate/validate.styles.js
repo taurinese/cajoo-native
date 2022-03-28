@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        width: 75,
+        width: 50,
         borderRadius: 10,
         backgroundColor: "lightgray",
         fontSize: 30,

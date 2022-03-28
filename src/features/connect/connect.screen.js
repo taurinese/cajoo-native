@@ -5,6 +5,8 @@ import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/Key
 import styles from './connect.styles';
 import validateNumber from './connect.helper';
 
+import { Auth } from 'aws-amplify';
+
 class Connect extends Component {
 
     constructor(props){
@@ -38,6 +40,23 @@ class Connect extends Component {
         }
     }
 
+    creerMonCompte = async () => {
+        try {
+            const {user} = await Auth.signUp({
+              username: `+33${this.state.number}`,
+              password: '444444',
+            });
+            this.props.navigation.navigate('validateNumber', {phone: '+33' + this.state.number});
+            console.log('utilisateur créé:', user);
+          } catch (error) {
+            console.log('error signing up:', error);
+            if(error.code === 'UsernameExistsException') {
+              console.log('utilisateur existant')
+              Alert.alert('Erreur', "Un utilisateur existe déjà avec ce numéro", [{text: 'Fermer'}]);
+          }
+        }
+    }
+
     render() {
         return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.mainContainer}>
@@ -59,7 +78,7 @@ class Connect extends Component {
                     </View>
                     <View style={styles.bottomDiv}>
                             <Text style={styles.bottomText}>En cliquant sur "CONTINUER", vous acceptez la <Text style={styles.redText}>Politique de Confidentialité</Text>, les <Text style={styles.redText}>CGU</Text> et les <Text style={styles.redText}>CGV</Text> de Cajoo.</Text>
-                            <TouchableOpacity onPress={this.validateNumber} style={this.state.isValid ? styles.validateBtn : styles.validateBtnDisabled}>
+                            <TouchableOpacity onPress={this.creerMonCompte} style={this.state.isValid ? styles.validateBtn : styles.validateBtnDisabled}>
                                 <Text style={styles.whiteText}>CONTINUER</Text>
                             </TouchableOpacity>
                     </View>
