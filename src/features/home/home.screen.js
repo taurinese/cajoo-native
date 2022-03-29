@@ -7,7 +7,7 @@ class Home extends Component {
         return(
             <View>
                 <Text>Connecté</Text>
-                <Button onPress={this.props.navigation.navigate('landing')} title="Logout" />
+                <Button onPress={() => this.props.navigation.navigate('landing')} title="Logout" />
             </View>
         )
     }
